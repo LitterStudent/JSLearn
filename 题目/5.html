@@ -34,6 +34,16 @@
         }
     }
 
+    function debounce2(fun,delay,imediate){
+        let timmer
+        if(timmer){
+            clearTimeout(timmer);
+        }
+        return function (...args) {
+            
+        }
+    }
+
     let inputb = document.getElementById('debounce')
 
     let debounceAjax = debounce(ajax, 500)
