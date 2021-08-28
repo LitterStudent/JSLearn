@@ -23,51 +23,66 @@
     }
 
     function debounce(fun, delay) {
-        return function (args) {
+        return function (...args) {
             let that = this
             let _args = args
             clearTimeout(fun.id)
             // console.log(fun)
             fun.id = setTimeout(function () {
-                fun.call(this, _args)
+                fun.call(this, ..._args)
             }, delay)
         }
     }
 
-    function debounce2(fun,delay,imediate){
+    // immediate 是否立即调用 立即调用后 delay毫秒内不会重复调用会无效
+    function debounce2(fun, delay, immediate) {
         let timmer
-        if(timmer){
-            clearTimeout(timmer);
-        }
         return function (...args) {
-            
+            if (timmer) {
+                clearTimeout(timmer);
+            }
+            if (immediate) {
+                const callNow = !timmer
+                timmer = setTimeout(() => {
+                    timmer = null
+                }, delay)
+                if (callNow) {
+                    fun.call(this, ...args)
+                }
+            }
+            else {
+                timmer = setTimeout(() => {
+                    fun.call(this, ...args)
+                }, delay)
+            }
         }
     }
 
     let inputb = document.getElementById('debounce')
 
-    let debounceAjax = debounce(ajax, 500)
+    let debounceAjax = debounce2(ajax, 500,true)
 
     inputb.addEventListener('keyup', function (e) {
         debounceAjax(e.target.value)
     })
 
+    // 节流
     function throttle(fun, delay) {
         let flag = true
-        return function (args) {
-            if(!flag) return
+        return function (...args) {
+            if (!flag) return
             flag = false
             let now = + new Date()
-            let _args = args+now
-            setTimeout(()=>{
+            let _args = args + now
+            setTimeout(() => {
                 fun.call(this, _args)
-                flag=true
-            },delay)
-
-                    
-            
+                flag = true
+            }, delay)
         }
     }
+
+
+
     let throttleAjax = throttle(ajax, 1000)
 
     let inputc = document.getElementById("throttle")
