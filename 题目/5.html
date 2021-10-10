@@ -15,7 +15,10 @@
 </body>
 <script>
     // 防抖与节流
-
+// 防抖的原理就是：你尽管触发事件，但是我一定在事件触发 n 秒后才执行，
+//如果你在一个事件触发的 n 秒内又触发了这个事件，
+//那我就以新的事件的时间为准，n 秒后才执行，
+//总之，就是要等你触发完事件 n 秒内不再触发事件，我才执行，
 
     // 模拟一端ajax 请求
     function ajax(content) {
@@ -38,11 +41,12 @@
     function debounce2(fun, delay, immediate) {
         let timmer
         return function (...args) {
+            
             if (timmer) {
                 clearTimeout(timmer);
             }
             if (immediate) {
-                const callNow = !timmer
+                const callNow = !timmer;
                 timmer = setTimeout(() => {
                     timmer = null
                 }, delay)
@@ -60,7 +64,7 @@
 
     let inputb = document.getElementById('debounce')
 
-    let debounceAjax = debounce2(ajax, 500,true)
+    let debounceAjax = debounce2(ajax,1000,true)
 
     inputb.addEventListener('keyup', function (e) {
         debounceAjax(e.target.value)

@@ -10,7 +10,7 @@
         //  instanceof 实现,判断类型
         // instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
         const myInstaceOf = (left, right) => {
-            if (left === null || typeof left !== 'object') return false
+            if (left === null) return false
             let proto = Object.getPrototypeOf(left)
             while (true) {
                 if (proto === null) return false
@@ -19,12 +19,18 @@
             }
         }
 
+
+
+
+
         function student() {
 
         }
 
         const stu = new student()
-        console.log(myInstaceOf(stu, true))
+        console.log(Object.getPrototypeOf(student));
+        console.log(myInstaceOf(null, student))
+        console.log(student instanceof Function);
 
         let object = {
             a: 1, b: 2, c: 3
@@ -64,7 +70,7 @@
             return Object.prototype.toString.call(obj).replace('[object','').replace(']','')
             .toLowerCase()
         }
-        console.log(getTypeof(123))
+        console.log(getTypeof(Symbol("ff")))
     </script>
 </head>
 

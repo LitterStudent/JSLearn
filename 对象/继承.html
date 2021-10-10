@@ -95,7 +95,10 @@
         console.log(person2.__proto__.name)
 
         // 寄生式组合继承
-        
+        // 将子类的原型的原型指向父类的原型 
+        // 获取父类原型的公共属性
+        // 在子类的构造函数内道用父类的构造函数
+        // 获取父类实例的属性
         function inheritPrototype(subType, subperType) {
             let prototype = Object.create(subperType)
             prototype.constructor = subperType

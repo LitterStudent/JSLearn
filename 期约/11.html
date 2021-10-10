@@ -71,14 +71,17 @@
         // })
 
         // function mergePromise(ajaxArray) {
-        //     const data = []
-        //     let promise = Promise.resolve()
-        //     ajaxArray.forEach(v=>promise = promise.then(v).then((re)=>{
-        //         data.push(re)
-        //         return data
-        //     }))
-
-        //     return promise
+        // 在这里写代码
+        // let data = []
+        // //   
+        // let promise = Promise.resolve()
+        // arr.forEach(ajax => {
+        //     promise = promise.then(ajax).then((res) => {
+        //         data.push(res);
+        //         return Promise.resolve(data)
+        //     })
+        // })
+        // return promise
         // }
 
         // mergePromise([ajax1, ajax2, ajax3]).then(data => {
@@ -184,7 +187,7 @@
                         console.log(flag ? "重新请求成功" : "第一次请求成功", value)
                     }
                     else {
-                        resolve(http(value,true))
+                        resolve(http(value, true))
                         console.log(flag ? "重新请求失败" : "第一次请求失败功", value)
                     }
                 }, Math.random() * 2000)
